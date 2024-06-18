@@ -1,9 +1,15 @@
 let choice= ["rock", "paper", "scissors"];
-humanScore=0;
-computerScore=0;
+let humanScore=0;
+let computerScore=0;
 
-console.log(playRound(getHumanChoice(),getComputerChoice()));
+gameLoop();
 
+function gameLoop(){
+    while (humanScore<5 && computerScore<5){
+        (playRound(getHumanChoice(),getComputerChoice()));
+    } console.log(humanScore===5? "You win the game!":"You lost the game...");
+
+}
 function getComputerChoice(){
     let computerChoice=choice[Math.floor(Math.random()*choice.length)];
     return computerChoice;
@@ -19,7 +25,21 @@ function playRound(humanChoice, computerChoice){
         while (humanChoice === computerChoice) {
            computerChoice = getComputerChoice();
         }
-        return (humanChoice==="rock" && computerChoice === "scissors"  || humanChoice === "scissors"  && computerChoice === "paper" || humanChoice === "paper" && computerChoice === "rock")? `You Win! ${humanChoice} beats ${computerChoice}`: `Computer Wins. ${computerChoice} beats ${humanChoice}.`;
+           let result = (humanChoice==="rock" && computerChoice === "scissors"  || humanChoice === "scissors"  && computerChoice === "paper" || humanChoice === "paper" && computerChoice === "rock"|| false);
+        
+          
+          if (result){
+           humanScore++;
+            console.log(`You Win! ${humanChoice} beats ${computerChoice}.
+            The score is now:
+            Human:${humanScore} Computer:${computerScore}`);
+        } else {
+            computerScore++;
+            console.log(`Computer Wins. ${computerChoice} beats ${humanChoice}.    
+            The score is now:
+            Human:${humanScore} Computer:${computerScore}`);
+        }
 
-    } return "Your entry is invalid."
+    } else {console.log("Your entry is invalid.");}
 }
+
